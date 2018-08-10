@@ -18,6 +18,25 @@ var qa = [{ question	: " what was the turning point in the history of mankind th
 		   },
 ];
 
+var score = 0;
+//create an array that shows how many questions are answered
+var touchArray =[];
+//initiallizing the touchArray to all false 
+isThouched();
+
+
+//initiallizing the touchArray to all false 
+function isThouched(){
+	
+	 var i = 0;
+	 while( i < qa.length){
+	 	touchArray.push(false);
+	 	i++;
+	 }
+}
+
+
+
 // creates a random order of numbers btw 0 to n ; and returns them in an array.
 function randomOrder(int) {
 	var randArray = [];
@@ -39,8 +58,11 @@ function randomOrder(int) {
 	console.log(randArray);
 	return randArray;
 }
+// the function that shows whether all questions are touched
+function touchUpdate(){
 
-var score = 0;
+}
+
 
 $("#start-btn").on("click", function() {
     
@@ -98,12 +120,17 @@ $("#start-btn").on("click", function() {
 });
 
 $(document).on('click', ".Qblock", function(){
+
+
 		// console.log(this.textContent);
 		// console.log($(this).val());
 		console.log($(this.firstChild.nextSibling).val());
 
 		var whichQuestion = $(this.firstChild.nextSibling).val();
 		var correctAns = qa[whichQuestion].answer;
+		//Update the touchArray
+		touchArray[whichQuestion]= true;
+		console.log("touch array is "+ touchArray);
 
 		console.log(correctAns);
 
