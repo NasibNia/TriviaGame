@@ -24,6 +24,49 @@ var NumberOfQ = qa.length;
 var touchArray =[];
 //initiallizing the touchArray to all false 
 thouchInitial();
+var initialTime = 20;
+var clockRunning = false;
+var timeRemained = true;
+var intervalId;
+
+
+// Defininf the watch object
+var watch = {
+	
+  time: 0,
+  reset: function() {
+
+    watch.time = 0;
+    $("#timer").text("");
+  },
+  start: function() {
+
+    // Using setInterval to start the count here and setting the clock to running.
+    if (!clockRunning) {
+      intervalId = setInterval(watch.count, 1000);
+      clockRunning = true;
+    }
+  },
+
+  count: function() {
+    // increment time by 1, remember we cant use "this" here.
+    watch.time++;
+    console.log(watch.time);
+    if (watch.time <= initialTime ){
+    	$("#timer").html('<h3> Remaining Time :' + (initialTime-parseInt(watch.time))+ '</h3>');
+    } else{
+    	$("#timer").empty();
+    }
+    
+  },
+ };
+
+ var timeout = setTimeout(function() {
+        timeRemained = false;
+        // $("#timer").text("No Time Left");
+      }, initialTime+'000');
+
+
 
 
 //initiallizing the touchArray to all false 
@@ -63,6 +106,9 @@ function randomOrder(int) {
 
 $("#start-btn").on("click", function() {
     
+	
+
+
     // hiding the initial message of the page
     $(".card-body").slideUp("slow");
 
@@ -105,20 +151,21 @@ $("#start-btn").on("click", function() {
 		}
 		$('.form-area').append($form);
 
-					        // <button class="btn btn-primary hvr-float-shadow " id="start-btn"> START</button> 
-
+		// load the watch
+		watch.start();
 
     }
-
+    
 	$('.form-area').append('<button class="btn btn-secondary hvr-float-shadow mr-0 " id="submit-btn"> SUBMIT</button>')
-
+	// Start the watch
+	 
 
 
 });
 
 $(document).on('click', ".Qblock", function(){
 
-
+	if(timeRemained){
 		// console.log(this.textContent);
 		// console.log($(this).val());
 		console.log($(this.firstChild.nextSibling).val());
@@ -152,6 +199,7 @@ $(document).on('click', ".Qblock", function(){
 			$("#submit-btn").animate({opacity: '0.3'}, "fast");
 			$("#submit-btn").animate({opacity: '1'}, "fast");
 
+			// for some reason the loop didn't work
 			// var i=0;
 			// while (i<3){
 			//     $("#submit-btn").animate({opacity: '1'}, "fast");
@@ -159,10 +207,20 @@ $(document).on('click', ".Qblock", function(){
 			// }
 		}
 		//============================
-	});
+		} else {
+		//sliding up the window!
+		$(".form-area").slideUp("slow");
+		$(".form-area").empty();
+		showResults();
+		}
+});
 
 $(document).on('click', "#submit-btn" , function(){
-	
+
+
+if(timeRemained){	
+
+	$("#timer").slideUp("slow");
 	//first check to see if all the questions are answered and if not BUZZ the button
 	if (touchArray.indexOf(false) === -1){
 		$("#submit-btn").attr("style" , "background-color:green");
@@ -187,6 +245,7 @@ $(document).on('click', "#submit-btn" , function(){
     	$(this).animate({right: '5%'}, "fast");
 
 	}
+}
 });
 
 function showResults(){
@@ -209,6 +268,18 @@ function showResults(){
 	$(".results").append('<div id="message2"> You Scored <span id="stat" >'  + score + ' </span> out of <span id="stat">'+ NumberOfQ +' </span> and answered <span id="stat"> ' + correctness + ' </span>percent correct! </div>');
 	
 	console.log ('<div id="message2"> You Scored <span id="stat" '  + score + ' </span> out of <span id="stat">'+ NumberOfQ +' </span> and answered <span id="stat" ' + correctness + ' </span>percent correct! </div>');
+
+	var i=0;
+	while (i<10){
+	    // $(this).animate({opacity: '1'}, "fast");
+	    // $(this).animate({opacity: '0.3'}, "fast");
+	    $(".results").animate({right: '10%'}, "fast");
+	    $(".results").animate({right: '20%'}, "fast");
+    	i++;
+	}
+	$(".results").animate({right: '15%'}, "fast");
+
+
 }
 
 

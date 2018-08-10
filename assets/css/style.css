@@ -35,12 +35,28 @@ body ,html {
 	background-color: #f4eee8;
 }
 
-.form-area , .results{
+.form-area , .results, #timer{
 	position: relative;
 	background-color: #f4eee8;
 	font-size: 28px;
 	float: left;
 }
+
+#timer{
+	/*max-width: 500px;*/
+	text-align: center;
+	/*padding-top: 50px;*/
+	/*padding-bottom:50px;
+	padding-left: 50px;*/
+	margin-top: 0%;
+	margin-bottom: 0;
+	margin-left: 20%;
+	background-color: #f4eee8;
+	font-size: 28px;
+	
+	
+}
+
 #submit-btn{
 	position: absolute;
 	margin-left: 0;
