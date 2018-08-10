@@ -40,7 +40,7 @@ function randomOrder(int) {
 	return randArray;
 }
 
-
+var score = 0;
 
 $("#start-btn").on("click", function() {
     
@@ -50,6 +50,8 @@ $("#start-btn").on("click", function() {
     // creating the form on the page; the radio button options would be reordered randomly every time that page loads
     $(".card").empty();
     
+    
+
     for (var i = 0 ; i < qa.length ; i++){
 
 
@@ -71,7 +73,7 @@ $("#start-btn").on("click", function() {
 	       	// $label.attr("value", i);
 
 
-	    	var $input = $('<input type="radio">').attr({value: i, name: qa[i].list[reorder[j]]});
+	    	var $input = $('<input type="radio">').attr({value: i, name: ques});
 	    	var $checkmark = $('<span>').addClass("checkmark");
 
 	    	//Insert the input into the label
@@ -83,9 +85,19 @@ $("#start-btn").on("click", function() {
 
 		}
 		$('.form-area').append($form);
+
+					        // <button class="btn btn-primary hvr-float-shadow " id="start-btn"> START</button> 
+
+
     }
 
-	$(document).on('click', ".Qblock", function(){
+	$('.form-area').append('<button class="btn btn-primary hvr-float-shadow mr-0 " id="submit-btn"> SUBMIT</button>')
+
+
+
+});
+
+$(document).on('click', ".Qblock", function(){
 		// console.log(this.textContent);
 		// console.log($(this).val());
 		console.log($(this.firstChild.nextSibling).val());
@@ -97,16 +109,12 @@ $("#start-btn").on("click", function() {
 
 		if (this.textContent == correctAns){
 			console.log("Correct Answer");
+			score++;
 		} else {
 			console.log("Wrong");
 		}
-
-
-
+		console.log("score is :" +score);
 	});
-
-
-});
 
 
 });
