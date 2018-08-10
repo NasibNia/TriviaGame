@@ -22,7 +22,7 @@ var qa = [{ question	: " what was the turning point in the history of mankind th
 function randomOrder(int) {
 	var randArray = [];
 	var array = [];
-	console.log(array);
+	// console.log(array);
 	 var i = 0;
 	 while( i < int){
 	 	array.push(i);
@@ -44,28 +44,69 @@ function randomOrder(int) {
 
 $("#start-btn").on("click", function() {
     
+    // hiding the initial message of the page
     $(".card-body").slideUp("slow");
 
+    // creating the form on the page; the radio button options would be reordered randomly every time that page loads
+    $(".card").empty();
+    
+    for (var i = 0 ; i < qa.length ; i++){
 
 
+    	console.log(qa[i].question);
+    	
+    	var ansNums = qa[i].list.length;
+    	
+    	var reorder = randomOrder(ansNums);
+    	var ques = qa[i].question;	
+
+    	var $form = $('<form>').text(ques);
+    	
+    	// $form.addClass("card-body");
+
+    	for (var j=0 ; j < ansNums; j ++){
+	    	var $label = $('<label>').text(qa[i].list[reorder[j]]);
+	    	
+	       	$label.addClass("Qblock");
+	       	// $label.attr("value", i);
+
+
+	    	var $input = $('<input type="radio">').attr({value: i, name: qa[i].list[reorder[j]]});
+	    	var $checkmark = $('<span>').addClass("checkmark");
+
+	    	//Insert the input into the label
+			$input.appendTo($label);
+			$checkmark.appendTo($label);
+
+			//Insert the label into the DOM - replace body with the required position
+			$label.appendTo($form);
+
+		}
+		$('.form-area').append($form);
+    }
+
+	$(document).on('click', ".Qblock", function(){
+		// console.log(this.textContent);
+		// console.log($(this).val());
+		console.log($(this.firstChild.nextSibling).val());
+
+		var whichQuestion = $(this.firstChild.nextSibling).val();
+		var correctAns = qa[whichQuestion].answer;
+
+		console.log(correctAns);
+
+		if (this.textContent == correctAns){
+			console.log("Correct Answer");
+		} else {
+			console.log("Wrong");
+		}
+
+
+
+	});
 
 
 });
 
 
-
-
-
 });
-
-
-
-
-
-// <div class="form-check form-check-inline">  what was the turning point in the history of mankind that settled them down instead nomad life?
-
-// 				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-// 				  <label class="form-check-label" for="exampleRadios1">
-// 				    Default radio
-// 				  </label>
-// 			</div>
