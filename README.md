@@ -22,7 +22,7 @@ Users takes the quiz and is provided with a feedback. Also a timer is set for th
 # Images
 <!-- take a picture of the image and add it into the readme  -->
 <!-- ![image title](path or link to image) -->
-![wire frame](assets/images/IMG_1665.JPG)
+![wire frame](assets/images/sapiens.JPG)
 
 
 
