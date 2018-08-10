@@ -144,11 +144,19 @@ $(document).on('click', ".Qblock", function(){
 		// love this feature! :)
 		if (touchArray.indexOf(false) === -1){
 			$("#submit-btn").attr("style" , "background-color:green");
-			var i=0;
-			while (i<3){
-			    $(this).animate({opacity: '1'}, "fast");
-			    $(this).animate({opacity: '0.3'}, "fast");
-			}
+			$("#submit-btn").animate({opacity: '1'}, "fast");
+			$("#submit-btn").animate({opacity: '0.3'}, "fast");
+			$("#submit-btn").animate({opacity: '1'}, "fast");
+			$("#submit-btn").animate({opacity: '0.3'}, "fast");
+			$("#submit-btn").animate({opacity: '1'}, "fast");
+			$("#submit-btn").animate({opacity: '0.3'}, "fast");
+			$("#submit-btn").animate({opacity: '1'}, "fast");
+
+			// var i=0;
+			// while (i<3){
+			//     $("#submit-btn").animate({opacity: '1'}, "fast");
+			//     $("#submit-btn").animate({opacity: '0.3'}, "fast");
+			// }
 		}
 		//============================
 	});
@@ -157,9 +165,11 @@ $(document).on('click', "#submit-btn" , function(){
 	
 	//first check to see if all the questions are answered and if not BUZZ the button
 	if (touchArray.indexOf(false) === -1){
+		$("#submit-btn").attr("style" , "background-color:green");
 
 		//sliding up the window!
 		$(".form-area").slideUp("slow");
+		$(".form-area").empty();
 		showResults();
 
 
@@ -172,16 +182,33 @@ $(document).on('click', "#submit-btn" , function(){
 		    // $(this).animate({opacity: '0.3'}, "fast");
 		    $(this).animate({right: '3%'}, "fast");
 		    $(this).animate({right: '7%'}, "fast");
-        i++;
+        	i++;
     	}
     	$(this).animate({right: '5%'}, "fast");
 
 	}
 });
 
-function showResult(){
+function showResults(){
+	var correctness = score/NumberOfQ*100;
+	var message = "";
+	console.log("inside showResults")
+	// $(".form-area").append('<h1> Thanks for taking our Quiz </h1>');
+	if (correctness > 80){
+		message = "WOW, GOOD JOB!"
+	} else if (correctness >= 40 && correctness <= 80){
+		message = "Not Bad!, you have some idea about what happened to you in the past!"
+	} else {
+		message = "DUDE!, you have little knowledge about your ansistors!"
+	}
+	 console.log("score is : " + score);
+	 console.log("number of questions is : " + NumberOfQ);
 
+	$(".results").append('<h1 id="message">' + message +'</h1>');
+	// $(".results").appen('<div>')
+	$(".results").append('<div id="message2"> You Scored <span id="stat" >'  + score + ' </span> out of <span id="stat">'+ NumberOfQ +' </span> and answered <span id="stat"> ' + correctness + ' </span>percent correct! </div>');
 	
+	console.log ('<div id="message2"> You Scored <span id="stat" '  + score + ' </span> out of <span id="stat">'+ NumberOfQ +' </span> and answered <span id="stat" ' + correctness + ' </span>percent correct! </div>');
 }
 
 

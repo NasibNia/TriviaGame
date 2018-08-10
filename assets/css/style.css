@@ -35,7 +35,7 @@ body ,html {
 	background-color: #f4eee8;
 }
 
-.form-area{
+.form-area , .results{
 	position: relative;
 	background-color: #f4eee8;
 	font-size: 28px;
@@ -47,6 +47,41 @@ body ,html {
 	bottom: 5%;
 	right: 5%;
 	/*float: right;*/
+}
+
+.results{
+	
+	background-color: #f4eee8;
+	max-width: 80%;
+	margin-top: 20%;
+	margin-bottom: 20%;
+	margin-left: 0%;
+	margin-right: 20%;
+	text-align: center;	
+}
+
+#message{
+	font-size: 35px;
+	padding-top: 50px;
+	padding-bottom:50px;
+	padding-left: 50px;
+	text-align: center;
+	font-style: bold;
+	font-weight: 200;
+}
+
+#message2{
+	font-size: 24px;
+	padding-top: 50px;
+	padding-bottom:50px;
+	padding-left: 50px;
+	text-align: center;
+	/*line-height: 4;*/
+}
+#stat{
+	font-size: 30px;
+	font-weight: 500;
+	font-style: bold;
 }
 
 /*.card-title{
