@@ -258,7 +258,7 @@ function showResults(){
 	} else if (correctness >= 40 && correctness <= 80){
 		message = "Not Bad!, you have some idea about what happened to you in the past!"
 	} else {
-		message = "DUDE!, you have little knowledge about your ansistors!"
+		message = "DUDE!, you have little knowledge about your ancestors!"
 	}
 	 console.log("score is : " + score);
 	 console.log("number of questions is : " + NumberOfQ);
