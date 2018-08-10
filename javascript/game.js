@@ -19,6 +19,7 @@ var qa = [{ question	: " what was the turning point in the history of mankind th
 ];
 
 var score = 0;
+var NumberOfQ = qa.length;
 //create an array that shows how many questions are answered
 var touchArray =[];
 //initiallizing the touchArray to all false 
@@ -137,26 +138,34 @@ $(document).on('click', ".Qblock", function(){
 			console.log("Wrong");
 		}
 		console.log("score is :" +score);
+		
+		//===========================
+		// change the submit button color AND flash it couple of times when all the questions are answered ; 
+		// love this feature! :)
+		if (touchArray.indexOf(false) === -1){
+			$("#submit-btn").attr("style" , "background-color:green");
+			var i=0;
+			while (i<3){
+			    $(this).animate({opacity: '1'}, "fast");
+			    $(this).animate({opacity: '0.3'}, "fast");
+			}
+		}
+		//============================
 	});
 
 $(document).on('click', "#submit-btn" , function(){
 	
-	//first check to see if all the questions are answered and then activate the buttom only in this case
+	//first check to see if all the questions are answered and if not BUZZ the button
 	if (touchArray.indexOf(false) === -1){
 
-		$(this).attr("style" , "background-color:blue");
-
-
-
-
-
-
-
-
-
+		//sliding up the window!
+		$(".form-area").slideUp("slow");
+		showResults();
 
 
 	} else{
+
+		// Shake the submit button so the user knows there are questions left
 		var i=0;
 		while (i<5){
 		    // $(this).animate({opacity: '1'}, "fast");
@@ -164,14 +173,16 @@ $(document).on('click', "#submit-btn" , function(){
 		    $(this).animate({right: '3%'}, "fast");
 		    $(this).animate({right: '7%'}, "fast");
         i++;
-    }
-    $(this).animate({right: '5%'}, "fast");
+    	}
+    	$(this).animate({right: '5%'}, "fast");
 
 	}
 });
 
+function showResult(){
 
-
+	
+}
 
 
 
