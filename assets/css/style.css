@@ -44,8 +44,8 @@ body ,html {
 #submit-btn{
 	position: absolute;
 	margin-left: 0;
-	bottom: 0;
-	right: 0;
+	bottom: 5%;
+	right: 5%;
 	/*float: right;*/
 }
 

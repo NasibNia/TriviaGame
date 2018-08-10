@@ -22,11 +22,11 @@ var score = 0;
 //create an array that shows how many questions are answered
 var touchArray =[];
 //initiallizing the touchArray to all false 
-isThouched();
+thouchInitial();
 
 
 //initiallizing the touchArray to all false 
-function isThouched(){
+function thouchInitial(){
 	
 	 var i = 0;
 	 while( i < qa.length){
@@ -34,7 +34,6 @@ function isThouched(){
 	 	i++;
 	 }
 }
-
 
 
 // creates a random order of numbers btw 0 to n ; and returns them in an array.
@@ -59,9 +58,6 @@ function randomOrder(int) {
 	return randArray;
 }
 // the function that shows whether all questions are touched
-function touchUpdate(){
-
-}
 
 
 $("#start-btn").on("click", function() {
@@ -113,7 +109,7 @@ $("#start-btn").on("click", function() {
 
     }
 
-	$('.form-area').append('<button class="btn btn-primary hvr-float-shadow mr-0 " id="submit-btn"> SUBMIT</button>')
+	$('.form-area').append('<button class="btn btn-secondary hvr-float-shadow mr-0 " id="submit-btn"> SUBMIT</button>')
 
 
 
@@ -143,5 +139,44 @@ $(document).on('click', ".Qblock", function(){
 		console.log("score is :" +score);
 	});
 
+$(document).on('click', "#submit-btn" , function(){
+	
+	//first check to see if all the questions are answered and then activate the buttom only in this case
+	if (touchArray.indexOf(false) === -1){
+
+		$(this).attr("style" , "background-color:blue");
+
+
+
+
+
+
+
+
+
+
+
+	} else{
+		var i=0;
+		while (i<5){
+		    // $(this).animate({opacity: '1'}, "fast");
+		    // $(this).animate({opacity: '0.3'}, "fast");
+		    $(this).animate({right: '3%'}, "fast");
+		    $(this).animate({right: '7%'}, "fast");
+        i++;
+    }
+    $(this).animate({right: '5%'}, "fast");
+
+	}
+});
+
+
+
+
+
+
+
 
 });
+
+
