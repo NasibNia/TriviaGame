@@ -20,6 +20,13 @@ var qa = [{ question	: " what was the turning point in the history of mankind th
 
 var score = 0;
 var NumberOfQ = qa.length;
+// this array will hold the true or false statement indicating whether the question has been answered correcctly
+var results = [];
+// initializing the array
+for( var i = 0 ; i < NumberOfQ ; i++){
+	results.push(false);
+}
+
 //create an array that shows how many questions are answered
 var touchArray =[];
 //initiallizing the touchArray to all false 
@@ -43,35 +50,34 @@ var watch = {
 
     // Using setInterval to start the count here and setting the clock to running.
     if (!clockRunning) {
+	  clearInterval(intervalId);
       intervalId = setInterval(watch.count, 1000);
       clockRunning = true;
     }
   },
 
   count: function() {
-    // increment time by 1, remember we cant use "this" here.
+	// increment time by 1, remember we cant use "this" here.
     watch.time++;
-    console.log(watch.time);
     if (watch.time <= initialTime ){
     	$("#timer").html('<h3> Remaining Time :' + (initialTime-parseInt(watch.time))+ '</h3>');
     } else{
-    	$("#timer").empty();
+		watch.stop();
+		timeRemained = false;
+		$("#timer").html('<h3> Remaining Time : 0 </h3>');
     }
     
   },
+
+  stop : function (){
+	clearInterval(intervalId);
+  }
+
+
  };
 
- var timeout = setTimeout(function() {
-        timeRemained = false;
-        // $("#timer").text("No Time Left");
-      }, initialTime+'000');
-
-
-
-
 //initiallizing the touchArray to all false 
-function thouchInitial(){
-	
+function thouchInitial(){	
 	 var i = 0;
 	 while( i < qa.length){
 	 	touchArray.push(false);
@@ -105,9 +111,8 @@ function randomOrder(int) {
 
 
 $("#start-btn").on("click", function() {
-    
-	
 
+	score = 0;
 
     // hiding the initial message of the page
     $(".card-body").slideUp("slow");
@@ -166,25 +171,18 @@ $("#start-btn").on("click", function() {
 $(document).on('click', ".Qblock", function(){
 
 	if(timeRemained){
-		// console.log(this.textContent);
-		// console.log($(this).val());
-		console.log($(this.firstChild.nextSibling).val());
 
 		var whichQuestion = $(this.firstChild.nextSibling).val();
 		var correctAns = qa[whichQuestion].answer;
 		//Update the touchArray
 		touchArray[whichQuestion]= true;
-		console.log("touch array is "+ touchArray);
 
-		console.log(correctAns);
 
 		if (this.textContent == correctAns){
-			console.log("Correct Answer");
-			score++;
+			results[whichQuestion] = true;
 		} else {
-			console.log("Wrong");
+			results[whichQuestion] = false;
 		}
-		console.log("score is :" +score);
 		
 		//===========================
 		// change the submit button color AND flash it couple of times when all the questions are answered ; 
@@ -199,18 +197,13 @@ $(document).on('click', ".Qblock", function(){
 			$("#submit-btn").animate({opacity: '0.3'}, "fast");
 			$("#submit-btn").animate({opacity: '1'}, "fast");
 
-			// for some reason the loop didn't work
-			// var i=0;
-			// while (i<3){
-			//     $("#submit-btn").animate({opacity: '1'}, "fast");
-			//     $("#submit-btn").animate({opacity: '0.3'}, "fast");
-			// }
 		}
 		//============================
 		} else {
 		//sliding up the window!
 		$(".form-area").slideUp("slow");
 		$(".form-area").empty();
+		calculateResults();
 		showResults();
 		}
 });
@@ -228,6 +221,7 @@ if(timeRemained){
 		//sliding up the window!
 		$(".form-area").slideUp("slow");
 		$(".form-area").empty();
+		calculateResults();
 		showResults();
 
 
@@ -236,8 +230,7 @@ if(timeRemained){
 		// Shake the submit button so the user knows there are questions left
 		var i=0;
 		while (i<5){
-		    // $(this).animate({opacity: '1'}, "fast");
-		    // $(this).animate({opacity: '0.3'}, "fast");
+
 		    $(this).animate({right: '3%'}, "fast");
 		    $(this).animate({right: '7%'}, "fast");
         	i++;
@@ -260,8 +253,6 @@ function showResults(){
 	} else {
 		message = "DUDE!, you have little knowledge about your ancestors!"
 	}
-	 console.log("score is : " + score);
-	 console.log("number of questions is : " + NumberOfQ);
 
 	$(".results").append('<h1 id="message">' + message +'</h1>');
 	// $(".results").appen('<div>')
@@ -273,16 +264,25 @@ function showResults(){
 	while (i<10){
 	    // $(this).animate({opacity: '1'}, "fast");
 	    // $(this).animate({opacity: '0.3'}, "fast");
-	    $(".results").animate({right: '10%'}, "fast");
-	    $(".results").animate({right: '20%'}, "fast");
+	    $(".results").animate({right: '10%'}, "slow");
+	    $(".results").animate({right: '20%'}, "slow");
     	i++;
 	}
-	$(".results").animate({right: '15%'}, "fast");
+	$(".results").animate({right: '15%'}, "slow");
 
 
 }
 
+function calculateResults () {
+	score = 0;
 
+	for (let i = 0; i < results.length; i++) {
+		if (results[i] === true) {
+			score++;
+		}
+		
+	}
+}
 
 
 
